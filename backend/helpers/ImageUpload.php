@@ -75,8 +75,8 @@ class ImageUpload
         }
 
         $path = $this->directory . DIRECTORY_SEPARATOR . basename($image);
-        if (is_file($path) && !@unlink($path)) {
-            throw new RuntimeException("Impossible de supprimer l'image.");
+        if (is_file($path)) {
+            @unlink($path);
         }
     }
 

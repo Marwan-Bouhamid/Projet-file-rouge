@@ -98,7 +98,7 @@ class OffreService
         }
 
         if ($newImage !== null) {
-            $this->images->remove($existing['image'] ?? null);
+            $this->removeImageBestEffort($existing['image'] ?? null);
         }
 
         return $updated;
@@ -112,10 +112,19 @@ class OffreService
         }
         $deleted = $this->offres->delete($id);
         if ($deleted) {
-            $this->images->remove($existing['image'] ?? null);
+            $this->removeImageBestEffort($existing['image'] ?? null);
         }
 
         return $deleted;
+    }
+
+    private function removeImageBestEffort(?string $image): void
+    {
+        try {
+            $this->images->remove($image);
+        } catch (RuntimeException $exception) {
+            error_log('SmartMatch image cleanup failed: ' . $exception->getMessage());
+        }
     }
 
     private function normalize(array $data): array

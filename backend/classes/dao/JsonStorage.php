@@ -33,49 +33,43 @@ class JsonStorage
 
     public function create(array $data): array
     {
-        $rows = $this->read();
-        $data['id'] = $this->nextId($rows);
-        $rows[] = $data;
-        $this->save($rows);
-
-        return $data;
+        return $this->mutate(function (array $rows) use ($data): array {
+            $data['id'] = $this->nextId($rows);
+            $rows[] = $data;
+            return ['rows' => $rows, 'result' => $data];
+        });
     }
 
     public function update(int $id, array $data): ?array
     {
-        $rows = $this->read();
-
-        foreach ($rows as $index => $row) {
-            if ((int) ($row['id'] ?? 0) === $id) {
-                $rows[$index] = array_merge($row, $data, ['id' => $id]);
-                $this->save($rows);
-
-                return $rows[$index];
+        return $this->mutate(function (array $rows) use ($id, $data): array {
+            foreach ($rows as $index => $row) {
+                if ((int) ($row['id'] ?? 0) === $id) {
+                    $rows[$index] = array_merge($row, $data, ['id' => $id]);
+                    return ['rows' => $rows, 'result' => $rows[$index]];
+                }
             }
-        }
 
-        return null;
+            return ['rows' => $rows, 'result' => null, 'save' => false];
+        });
     }
 
     public function delete(int $id): bool
     {
-        $rows = $this->read();
-        $kept = [];
-        $found = false;
+        return $this->mutate(function (array $rows) use ($id): array {
+            $kept = [];
+            $found = false;
 
-        foreach ($rows as $row) {
-            if ((int) ($row['id'] ?? 0) === $id) {
-                $found = true;
-                continue;
+            foreach ($rows as $row) {
+                if ((int) ($row['id'] ?? 0) === $id) {
+                    $found = true;
+                    continue;
+                }
+                $kept[] = $row;
             }
-            $kept[] = $row;
-        }
 
-        if ($found) {
-            $this->save($kept);
-        }
-
-        return $found;
+            return ['rows' => $kept, 'result' => $found, 'save' => $found];
+        });
     }
 
     protected function read(): array
@@ -116,13 +110,9 @@ class JsonStorage
         return $max + 1;
     }
 
-    protected function save(array $rows): void
+    private function mutate(callable $operation): mixed
     {
-        $json = json_encode(
-            array_values($rows),
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
-        );
-        $handle = fopen($this->file, 'c');
+        $handle = fopen($this->file, 'c+');
 
         if ($handle === false) {
             throw new RuntimeException('Impossible d\'ouvrir le fichier de stockage.');
@@ -132,13 +122,37 @@ class JsonStorage
             throw new RuntimeException('Impossible de verrouiller le fichier de stockage.');
         }
 
-        if (!ftruncate($handle, 0) || !rewind($handle) || fwrite($handle, $json) === false || !fflush($handle)) {
+        try {
+            rewind($handle);
+            $contents = stream_get_contents($handle);
+            if ($contents === false || trim($contents) === '') {
+                $rows = [];
+            } else {
+                $rows = json_decode($contents, true);
+                if (!is_array($rows)) {
+                    throw new RuntimeException('Le fichier de stockage contient un JSON invalide.');
+                }
+            }
+
+            $operationResult = $operation($rows);
+            if (($operationResult['save'] ?? true) === true) {
+                $json = json_encode(
+                    array_values($operationResult['rows']),
+                    JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
+                );
+                if (!ftruncate($handle, 0) || !rewind($handle)
+                    || fwrite($handle, $json) === false || !fflush($handle)) {
+                    throw new RuntimeException('Impossible d\'écrire le fichier de stockage.');
+                }
+            }
+        } catch (Throwable $exception) {
             flock($handle, LOCK_UN);
             fclose($handle);
-            throw new RuntimeException('Impossible d\'écrire le fichier de stockage.');
+            throw $exception;
         }
 
         flock($handle, LOCK_UN);
         fclose($handle);
+        return $operationResult['result'];
     }
 }
