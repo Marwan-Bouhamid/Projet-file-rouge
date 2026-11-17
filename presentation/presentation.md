@@ -212,6 +212,46 @@ style: |
     color: #172033;
     font-size: 1.15em;
   }
+  section.sprints .lead {
+    margin: 0 0 18px;
+    font-size: 1.05em;
+    color: #475569;
+  }
+  section.sprints .sprint-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    align-items: stretch;
+  }
+  section.sprints .sprint-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-top: 5px solid #4f46e5;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 18px rgba(36, 59, 107, 0.07);
+  }
+  section.sprints .sprint-num {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #4f46e5;
+  }
+  section.sprints h3 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+    color: #243b6b;
+  }
+  section.sprints ul {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.95em;
+    line-height: 1.55;
+    color: #334155;
+  }
 ---
 
 <!-- _class: title-slide -->
@@ -293,16 +333,41 @@ Aujourd'hui, la recherche d'emploi reste **chronophage et peu ciblée** :
 
 ---
 
-<!-- _class: compact -->
+<!-- _class: sprints -->
 
 ## Planification
 
-| Sprint | Période | Objectif | Livrable |
-|---|---|---|---|
-| **Sprint 1** | 22 sept. 2026 | Socle : page publique et espace admin | CRUD offres et compétences (MySQL / PDO) — `Season-1` |
-| **Sprint 2** | 04 oct. 2026 | Refactorisation orientée objet | API REST JSON et frontend dynamique — `Session-2` |
-| **Sprint 3** | 12 nov. 2026 | Sécurité et administration | Authentification, sessions, tableau de bord, uploads — `Session-3` |
-| **Sprint 4** | 17 nov. 2026 | Documentation et soutenance | Rapport, diagrammes et présentation — `Session-4` |
+<p class="lead">Le projet est organisé en plusieurs sprints :</p>
+
+<div class="sprint-grid">
+  <div class="sprint-card">
+    <span class="sprint-num">Sprint 01</span>
+    <h3>Gestion des produits</h3>
+    <ul>
+      <li>CRUD Product.</li>
+      <li>Affichage des produits dans la plateforme.</li>
+      <li>Diagramme de cas d'utilisation.</li>
+    </ul>
+  </div>
+  <div class="sprint-card">
+    <span class="sprint-num">Sprint 02</span>
+    <h3>Gestion des catégories</h3>
+    <ul>
+      <li>CRUD Category.</li>
+      <li>Organisation des fichiers.</li>
+      <li>Séparation des responsabilités.</li>
+    </ul>
+  </div>
+  <div class="sprint-card">
+    <span class="sprint-num">Sprint 03</span>
+    <h3>Architecture</h3>
+    <ul>
+      <li>Utilisation du pattern DAO.</li>
+      <li>Architecture en 3 couches.</li>
+      <li>Séparation de la logique métier et des données.</li>
+    </ul>
+  </div>
+</div>
 
 ---
 
