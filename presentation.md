@@ -67,21 +67,21 @@ style: |
 
 ## Scrum
 
-![Méthode Scrum](../rapport/SCRUM/scrum.png)
+![Méthode Scrum](/rapport/SCRUM/scrum.png)
 
 ---
 <!-- _class: image-only -->
 
 ## Processus 2TUP
 
-![Processus 2TUP](../rapport/2TUP/images.jpg)
+![Processus 2TUP](/rapport/2TUP/images.jpg)
 
 ---
 <!-- _class: image-only -->
 
 ## Design Thinking
 
-![Design Thinking](../rapport/design_thinking/design_thinking.jpg)
+![Design Thinking](/rapport/design_thinking/design_thinking.jpg)
 
 ---
 
