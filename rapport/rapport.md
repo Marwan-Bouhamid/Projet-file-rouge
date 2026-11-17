@@ -9,31 +9,35 @@ title: Rapport du projet fil rouge
 
 ## Table des matières
 
-- [Remerciements](#remerciements)
-- [Introduction](#introduction)
-- [Contexte du projet](#contexte-du-projet)
-- [Objectif de formation (Solicode)](#objectif-de-formation-solicode)
-- [Cahier des charges](#cahier-des-charges)
-- [Méthodologie de travail](#méthodologie-de-travail)
-  - [Méthodologie Scrum](#méthodologie-scrum)
-  - [Processus 2TUP](#processus-2tup)
-  - [Design Thinking](#design-thinking)
-- [Planification](#planification)
-- [Branche fonctionnelle](#branche-fonctionnelle)
-  - [Carte d'empathie](#carte-dempathie)
-  - [Définition du problème](#définition-du-problème)
-  - [Idéation](#idéation)
-  - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
-- [Branche technique](#branche-technique)
-  - [Stack technologique](#stack-technologique)
-  - [Architecture logicielle](#architecture-logicielle)
-  - [Prototype : fonctionnalités et classes](#prototype--fonctionnalités-et-classes)
-- [Conception](#conception)
-  - [Diagramme de classes](#diagramme-de-classes)
-  - [Maquettes](#maquettes)
-- [Réalisation](#réalisation)
-  - [Interfaces](#interfaces)
-- [Conclusion](#conclusion)
+- [Rapport du projet fil rouge](#rapport-du-projet-fil-rouge)
+  - [Table des matières](#table-des-matières)
+  - [Remerciements](#remerciements)
+  - [Introduction](#introduction)
+  - [Contexte du projet](#contexte-du-projet)
+  - [Objectif de formation (Solicode)](#objectif-de-formation-solicode)
+  - [Cahier des charges](#cahier-des-charges)
+  - [Méthodologie de travail](#méthodologie-de-travail)
+    - [Méthodologie Scrum](#méthodologie-scrum)
+      - [Sprint 1](#sprint-1)
+      - [Sprint 2](#sprint-2)
+    - [Processus 2TUP](#processus-2tup)
+    - [Design Thinking](#design-thinking)
+  - [Planification](#planification)
+  - [Branche fonctionnelle](#branche-fonctionnelle)
+    - [Carte d'empathie](#carte-dempathie)
+    - [Définition du problème](#définition-du-problème)
+    - [Idéation](#idéation)
+    - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
+  - [Branche technique](#branche-technique)
+    - [Stack technologique](#stack-technologique)
+    - [Architecture logicielle](#architecture-logicielle)
+    - [Prototype : fonctionnalités et classes](#prototype--fonctionnalités-et-classes)
+  - [Conception](#conception)
+    - [Diagramme de classes](#diagramme-de-classes)
+    - [Maquettes](#maquettes)
+  - [Réalisation](#réalisation)
+    - [Interfaces](#interfaces)
+  - [Conclusion](#conclusion)
 
 ## Remerciements
 
@@ -122,7 +126,7 @@ Le dépôt permet d'identifier les choix techniques suivants pour la plateforme 
 
 À noter : la spécification du Sprint 1 prévoyait MySQL avec PDO et du CSS natif ; le code actuel a été refactorisé en programmation orientée objet avec un stockage JSON et Tailwind CDN. La description ci-dessus correspond à l'état du dépôt.
 
-### Architecture logicielle
+###  Architecture logicielle
 
 L'application est organisée en trois couches :
 
