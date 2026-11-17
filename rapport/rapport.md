@@ -61,7 +61,7 @@ Scrum est une méthode agile qui organise le travail en cycles courts et favoris
 
 Le projet SmartMatch est organisé en sprints successifs. Chaque cycle permet de livrer un ensemble fonctionnel : la page publique et l'espace d'administration ont ainsi été développés puis enrichis au fil des itérations.
 
-![Schéma de la méthode Scrum](SCRUM/scrum.png)
+![Schéma de la méthode Scrum](../rapport/SCRUM/scrum.png)
 
 *Figure 1 — Schéma de la méthode Scrum.*
 
@@ -78,7 +78,7 @@ Le projet SmartMatch est organisé en sprints successifs. Chaque cycle permet de
 
 Les deux branches convergent vers la réalisation, qui peut comprendre la conception, le développement, les tests et le déploiement. Le projet SmartMatch sépare effectivement les besoins fonctionnels — gestion des offres, des compétences et des utilisateurs — des choix techniques — API, stockage des données et authentification — avant leur intégration dans l'application.
 
-![Schéma du processus 2TUP](2TUP/images.jpg)
+![Schéma du processus 2TUP](../rapport/2TUP/images.jpg)
 
 *Figure 2 — Schéma général du processus 2TUP.*
 
